@@ -7,6 +7,7 @@ import br.com.alura.screenmatch.service.ConsumoApi;
 import br.com.alura.screenmatch.service.ConverteDados;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
@@ -43,6 +44,16 @@ public class Principal {
 
         //essa linha de código representa uma versão refatorada do for acima
         listaDadosTemporada.forEach(t -> t.episodiosLista().forEach(e -> System.out.println(e.titulo())));
+
+        List<String> nomes = Arrays.asList("Giovana", "Mateus", "Léo", "Kiara");
+
+        //Exemplo de como pode-se utilizar uma stream
+        /*nomes
+                .stream()
+                .sorted()
+                .limit(3)
+                .map(n -> n.toUpperCase())
+                .forEach(System.out::println);*/
 
     }
 
