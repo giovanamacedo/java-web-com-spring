@@ -6,10 +6,7 @@ import br.com.alura.screenmatch.model.DadosTemporada;
 import br.com.alura.screenmatch.service.ConsumoApi;
 import br.com.alura.screenmatch.service.ConverteDados;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class Principal {
 
@@ -45,8 +42,7 @@ public class Principal {
         //essa linha de código representa uma versão refatorada do for acima
         listaDadosTemporada.forEach(t -> t.episodiosLista().forEach(e -> System.out.println(e.titulo())));
 
-        List<String> nomes = Arrays.asList("Giovana", "Mateus", "Léo", "Kiara");
-
+        //List<String> nomes = Arrays.asList("Giovana", "Mateus", "Léo", "Kiara");
         //Exemplo de como pode-se utilizar uma stream
         /*nomes
                 .stream()
@@ -55,6 +51,15 @@ public class Principal {
                 .map(n -> n.toUpperCase())
                 .forEach(System.out::println);*/
 
+        List<DadosEpisodio> dadosEpisodios = listaDadosTemporada.stream()
+                                            .flatMap(t -> t.episodiosLista().stream())
+                                            .toList();
+
+        dadosEpisodios.stream()
+                .filter(e -> !e.avaliacao().equalsIgnoreCase("N/A"))
+                .sorted(Comparator.comparing(DadosEpisodio::avaliacao).reversed())
+                .limit(5)
+                .forEach(System.out::println);d
     }
 
 }
